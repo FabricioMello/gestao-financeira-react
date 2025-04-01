@@ -1,9 +1,10 @@
 import { create } from "zustand"
 import { Step1Data } from "../schemas/step1.schema"
+import { Step2Data } from "../schemas/step2.schema"
 
 interface TransactionFormState {
-    data: Partial<Step1Data>
-    setData: (values: Partial<Step1Data>) => void
+    data: Partial<Step1Data & Step2Data>
+    setData: (values: Partial<Step1Data & Step2Data>) => void
     reset: () => void
 }
 

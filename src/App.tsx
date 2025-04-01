@@ -1,15 +1,17 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "@/pages/Home"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import Dashboard from "@/pages/Dashboard"
 import NovaTransacao from "@/pages/NovaTransacao"
+import SidebarLayout from "@/components/layout/SidebarLayout"
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/nova-transacao" element={<NovaTransacao />} />
+                <Route element={<SidebarLayout />}>
+                    <Route index element={<Navigate to="/dashboard" replace />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/nova-transacao" element={<NovaTransacao />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     )
