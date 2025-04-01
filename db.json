@@ -1,0 +1,28 @@
+{
+  "categories": [
+    { "id": "1", "name": "Alimentação", "color": "#FF6B6B" },
+    { "id": "2", "name": "Salário", "color": "#4ECDC4" },
+    { "id": "3", "name": "Lazer", "color": "#FFD93D" },
+    { "id": "4", "name": "Transporte", "color": "#1A535C" }
+  ],
+  "transactions": [
+    {
+      "id": "101",
+      "type": "income",
+      "title": "Freelance Site",
+      "amount": 1200,
+      "categoryId": "2",
+      "date": "2025-03-30",
+      "isRecurring": false
+    },
+    {
+      "id": "102",
+      "type": "expense",
+      "title": "iFood",
+      "amount": 45.5,
+      "categoryId": "1",
+      "date": "2025-03-29",
+      "isRecurring": false
+    }
+  ]
+}

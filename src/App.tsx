@@ -1,15 +1,18 @@
-import { Button } from "./components/ui/button"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "@/pages/Home"
+import Dashboard from "@/pages/Dashboard"
+import NovaTransacao from "@/pages/NovaTransacao"
 
 function App() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-      <div className="space-y-4 text-center">
-        <h1 className="text-2xl font-semibold">Sistema de Gestão Financeira 💸</h1>
-        <Button variant="default">Começar</Button>
-        <Button variant="outline">Ver Dashboard</Button>
-      </div>
-    </div>
-  )
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/nova-transacao" element={<NovaTransacao />} />
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App

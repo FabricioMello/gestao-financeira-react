@@ -9,12 +9,12 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "outDir": "dist",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["*"],
-      "@components/*": ["components/*"],
-      "@lib/*": ["lib/*"],
-      "@hooks/*": ["hooks/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src"],
