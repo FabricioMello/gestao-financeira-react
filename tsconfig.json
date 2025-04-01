@@ -4,11 +4,16 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
+
+    /* Strict Type-Checking Options */
     "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noEmit": true,
     "jsx": "react-jsx",
     "outDir": "dist",
+    "strict": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
@@ -19,7 +24,6 @@
   },
   "include": ["src"],
   "references": [
-    { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ]
 }
