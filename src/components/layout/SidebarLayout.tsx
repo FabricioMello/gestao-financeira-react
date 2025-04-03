@@ -8,7 +8,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarProvider,
-    SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { LayoutDashboard, PlusCircle } from "lucide-react"
 import { Outlet, useNavigate } from "react-router-dom"
@@ -21,16 +20,22 @@ export default function SidebarLayout() {
             <Sidebar>
                 <SidebarContent>
                     <SidebarGroup>
-                        <SidebarGroupLabel>Sistema</SidebarGroupLabel>
-                        <SidebarMenu>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton onClick={() => navigate("/dashboard")}>
+                        <SidebarGroupLabel className={"text-2xl underline p-4"}>Sistema Financeiro</SidebarGroupLabel>
+                        <SidebarMenu className={"pt-8"}>
+                            <SidebarMenuItem className={"p-2"}>
+                                <SidebarMenuButton onClick={() => navigate("/categories")}>
                                     <LayoutDashboard className="mr-2 h-4 w-4" />
-                                    Dashboard
+                                    Categorias
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton onClick={() => navigate("/nova-transacao")}>
+                            <SidebarMenuItem className={"p-2"}>
+                                <SidebarMenuButton onClick={() => navigate("/transactions")}>
+                                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                                    Balanço Geral
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem className={"p-2"}>
+                                <SidebarMenuButton onClick={() => navigate("/new-transaction")}>
                                     <PlusCircle className="mr-2 h-4 w-4" />
                                     Nova Transação
                                 </SidebarMenuButton>
@@ -40,12 +45,6 @@ export default function SidebarLayout() {
                 </SidebarContent>
             </Sidebar>
             <SidebarInset>
-                {/* Esse botão é para mobile */}
-                <div className="p-2 md:hidden">
-                    <SidebarTrigger />
-                </div>
-
-                {/* Aqui vai o conteúdo das rotas */}
                 <Outlet />
             </SidebarInset>
         </SidebarProvider>
