@@ -5,7 +5,7 @@ export function useDeleteCategory() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
 
-    const deleteCategoryById = async (id: number) => {
+    const deleteCategoryById = async (id: number | null) => {
         setLoading(true);
         setError(null);
         try {

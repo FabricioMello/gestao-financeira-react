@@ -2,8 +2,9 @@ import {Table, TableHeader, TableRow, TableHead, TableBody, TableCell} from "@co
 import {Category} from "@/interfaces";
 import {useCategories} from "@hooks/categories/useCategories.ts";
 import {useUserStore} from "@/features/transactions/store/userStore.ts";
-import {Button} from "@components/ui/button.tsx";
 import {useDeleteCategory} from "@hooks/categories/useDeleteCategory.ts";
+import {useState} from "react";
+import { ConfirmDeleteDialog } from "@/components/layout/ConfirmDeleteDialog";
 
 export default function CategoriesLayout() {
     const user = useUserStore((state) => state.user);
@@ -13,12 +14,6 @@ export default function CategoriesLayout() {
     if (loading || !user) return <p>Loading...</p>;
     if (error) return <p>Error loading categories: {error.message}</p>;
     if (deleteError) return <p>Error deleting category: {deleteError.message}</p>;
-
-    const handleDelete = (id: number) => {
-        if (window.confirm("Are you sure you want to delete this category?")) {
-            deleteCategoryById(id);
-        }
-    }
 
     return (
         <Table >
@@ -44,9 +39,12 @@ export default function CategoriesLayout() {
                         <TableCell>{categories.type}</TableCell>
                         <TableCell>{categories.budgetLimit}</TableCell>
                         <TableCell>
-                            <Button onClick={() => handleDelete(categories.id)} disabled={deleteLoading}>
-                                Delete
-                            </Button>
+                            <ConfirmDeleteDialog
+                                onConfirm={() => deleteCategoryById(categories.id)}
+                                loading={deleteLoading}
+                                title="Excluir Categoria"
+                                description="Tem certeza que deseja excluir esta categoria?"
+                            />
                         </TableCell>
                     </TableRow>
                 ))}
