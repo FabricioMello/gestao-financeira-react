@@ -2,11 +2,15 @@ import CategoriesLayout from "@components/layout/CategoriesLayout.tsx";
 
 export default function Categories() {
     return (
-        <div className="p-4 mx-auto">
+        <div className="container mx-auto py-10 space-y-4">
+            <div className="text-center space-y-1">
+                <h1 className="text-3xl font-semibold tracking-tight">Categorias</h1>
+            </div>
 
-        <h2 className="text-center mt-10">📊 Aqui vai o dashboard</h2>
-            <CategoriesLayout />
+            <div className="rounded-xl border bg-white shadow-md p-6">
+                <CategoriesLayout />
+            </div>
         </div>
-
-        )
+    )
 }
+

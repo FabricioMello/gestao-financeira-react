@@ -1,20 +1,23 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import Categories from "@/pages/Categories"
-import NewTransaction from "@/pages/NewTransaction.tsx"
-import SidebarLayout from "@/components/layout/SidebarLayout"
-import Transactions from "@/pages/Transactions"
+import { BrowserRouter } from "react-router-dom"
+import {AppRoutes} from "@/routes.tsx";
+import {useUserStore} from "@/features/transactions/store/userStore.ts";
+import {useEffect} from "react";
+import {api} from "@/services/api.ts";
+import {User} from "@/interfaces";
 
 function App() {
+    const setUser = useUserStore((state) => state.setUser);
+
+    useEffect(() => {
+        //TODO: Corrigir usuário logado
+        api.get<User>("/users/1")
+            .then((res) => setUser(res.data))
+            .catch((err) => console.error("Error fetching user:", err));
+    }, [setUser]);
+
     return (
         <BrowserRouter>
-            <Routes>
-                <Route element={<SidebarLayout />}>
-                    <Route index element={<Navigate to="/categories" replace />} />
-                    <Route path="/categories" element={<Categories />} />
-                    <Route path="/transactions" element={<Transactions />} />
-                    <Route path="/new-transaction" element={<NewTransaction />} />
-                </Route>
-            </Routes>
+            <AppRoutes />
         </BrowserRouter>
     )
 }

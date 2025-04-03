@@ -44,7 +44,7 @@ export default function SidebarLayout() {
                     </SidebarGroup>
                 </SidebarContent>
             </Sidebar>
-            <SidebarInset>
+            <SidebarInset className={"bg-muted"}>
                 <Outlet />
             </SidebarInset>
         </SidebarProvider>
