@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom"
-import {AppRoutes} from "@/routes.tsx";
+import {AppRoutes} from "@/routes/routes.tsx";
 import {useUserStore} from "@/features/transactions/store/userStore.ts";
 import {useEffect} from "react";
 import {api} from "@/services/api.ts";

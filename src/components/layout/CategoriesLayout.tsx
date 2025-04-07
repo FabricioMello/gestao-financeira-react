@@ -3,15 +3,15 @@ import {Category} from "@/interfaces";
 import {useCategories} from "@hooks/categories/useCategories.ts";
 import {useUserStore} from "@/features/transactions/store/userStore.ts";
 import {useDeleteCategory} from "@hooks/categories/useDeleteCategory.ts";
-import {useState} from "react";
 import { ConfirmDeleteDialog } from "@/components/layout/ConfirmDeleteDialog";
+import { Loader2 } from "lucide-react";
 
 export default function CategoriesLayout() {
     const user = useUserStore((state) => state.user);
     const { categories, loading, error } = useCategories(user?.id ?? 0);
     const { deleteCategoryById, loading: deleteLoading, error: deleteError } = useDeleteCategory();
 
-    if (loading || !user) return <p>Loading...</p>;
+    if (loading || !user) return <Loader2 className="h-5 w-5 animate-spin text-primary" />;
     if (error) return <p>Error loading categories: {error.message}</p>;
     if (deleteError) return <p>Error deleting category: {deleteError.message}</p>;
 
