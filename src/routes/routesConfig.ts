@@ -1,7 +1,7 @@
 import { LayoutDashboard, PlusCircle, Wallet, LeafyGreen } from "lucide-react";
 import { lazy } from "react";
 
-export const appRoutes = [
+export const routesConfig = [
     {
         path: "/",
         label: "Dashboards",
