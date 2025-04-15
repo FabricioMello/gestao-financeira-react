@@ -1,4 +1,4 @@
-import { LayoutDashboard, PlusCircle, Wallet, LeafyGreen } from "lucide-react";
+import { LayoutDashboard, Wallet, LeafyGreen } from "lucide-react";
 import { lazy } from "react";
 
 export const routesConfig = [
@@ -19,11 +19,5 @@ export const routesConfig = [
         label: "Balanço Geral",
         icon: Wallet,
         element: lazy(() => import("@/pages/Transactions.tsx")),
-    },
-    {
-        path: "/new-transaction",
-        label: "Nova Transação",
-        icon: PlusCircle,
-        element: lazy(() => import("@/pages/NewTransaction.tsx")),
-    },
+    }
 ];

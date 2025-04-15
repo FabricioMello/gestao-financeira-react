@@ -10,7 +10,12 @@ export function useTransactions(userId: number) {
     useEffect(() => {
         setLoading(true)
         api.get(`/transactions?userId=${userId}`)
-            .then((res) => setTransactions(res.data))
+            .then((res) => {
+                const sorted = res.data.sort(
+                    (a: Transaction, b: Transaction) => new Date(b.date).getTime() - new Date(a.date).getTime()
+                )
+                setTransactions(sorted)
+            })
             .catch((err) => setError(err))
             .finally(() => setLoading(false))
     }, [userId])

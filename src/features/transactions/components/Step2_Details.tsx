@@ -1,42 +1,38 @@
-import { useCategories } from "@hooks/categories/useCategories.ts"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { useFormContext } from "react-hook-form"
-import { useTransactionForm } from "../store/transactionForm.store"
-import { useEffect } from "react"
+import { useCategories } from "@hooks/categories/useCategories";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useFormContext } from "react-hook-form";
+import { useTransactionForm } from "../store/transactionForm.store";
+import { Step2Data } from "@/features/transactions/schemas/step2.schema";
+import { Button } from "@/components/ui/button";
 
-export function Step2_Details() {
-    const { register, setValue } = useFormContext()
-    const { data } = useTransactionForm()
-    const type = data.type // income | expense
+interface Step2Props {
+    onNext: () => void;
+}
 
-    console.log('type', type);
-    const { categories } = useCategories(1)
-    const filteredCategories = categories.filter((c) => c.type === type)
-    console.log(filteredCategories);
+export function Step2_Details({ onNext }: Step2Props) {
+    const { register, handleSubmit, setValue, watch } = useFormContext<Step2Data>();
+    const { data, setData } = useTransactionForm();
+    const { categories } = useCategories(1);
+    const type = data.type;
+    const categoryId = watch("categoryId");
+    const filteredCategories = categories.filter((c) => c.type === type);
 
-    useEffect(() => {
-        if (data.categoryId) {
-            setValue("categoryId", data.categoryId)
-        }
-        if (data.description) {
-            setValue("description", data.description)
-        }
-        if (data.date) {
-            setValue("date", data.date)
-        }
-        if (data.notes) {
-            setValue("notes", data.notes)
-        }
-    }, [data, setValue])
+    const onSubmit = (values: Step2Data) => {
+        setData(values);
+        onNext();
+    };
 
     return (
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
                 <Label>Categoria</Label>
-                <Select onValueChange={(value) => setValue("categoryId", Number(value))}>
+                <Select
+                    value={categoryId ? String(categoryId) : ""}
+                    onValueChange={(value) => setValue("categoryId", Number(value))}
+                >
                     <SelectTrigger>
                         <SelectValue placeholder="Selecione uma categoria" />
                     </SelectTrigger>
@@ -64,6 +60,10 @@ export function Step2_Details() {
                 <Label htmlFor="notes">Notas (opcional)</Label>
                 <Textarea id="notes" {...register("notes")} />
             </div>
-        </div>
-    )
+
+            <div className="pt-4">
+                <Button type="submit">Próximo</Button>
+            </div>
+        </form>
+    );
 }
